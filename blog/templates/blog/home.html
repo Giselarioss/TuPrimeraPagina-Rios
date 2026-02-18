@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+<!-- Sección destacada -->
+<div class="hero-section bg-primary text-white py-5 mb-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold">NO TE PIERDAS</h1>
+                <h2 class="h3">Los mejores TIPS para viajar en comunidad</h2>
+                <p class="lead">Descubre consejos prácticos para viajes inolvidables con amigos o familia. ¡Comparte
+                    experiencias y crea recuerdos únicos!</p>
+                <a href="#posts" class="btn btn-light btn-lg">Ver Posts</a>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src="https://www.cvc.com.br/dicas-de-viagem/wp-content/uploads/2021/01/Vantagens-de-viajar-com-amigos-1170x650.png"
+                    class="img-fluid rounded shadow" alt="Amigos viajando">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lista de posts -->
+<h2 id="posts" class="mb-4">Posts Recientes</h2>
+<div class="row">
+    {% for post in posts %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            {% if post.image %}
+            <img src="{{ post.image.url }}" class="card-img-top" alt="Imagen del post">
+            {% else %}
+            <img src="https://via.placeholder.com/300x200?text=Sin+Imagen" class="card-img-top" alt="Sin imagen">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content|truncatewords:20 }}</p>
+                <p class="text-muted small">Por: {{ post.author.name }} | Categoría: {{ post.category.name }} | Fecha:
+                    {{ post.published_date|date:"d/m/Y" }}</p>
+                <a href="{% url 'post_detail' post.id %}" class="btn btn-primary btn-sm">Leer Más</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">No hay posts aún. ¡Crea uno desde "Crear Post"!</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

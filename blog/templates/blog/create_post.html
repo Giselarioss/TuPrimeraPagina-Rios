@@ -1,0 +1,41 @@
+{% extends 'blog/base.html' %}
+{% load widget_tweaks %}
+{% block title %}Crear Post{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4>Crear Nuevo Post</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.title.label_tag }}
+                        {{ form.title|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.content.label_tag }}
+                        {{ form.content|add_class:"form-control" }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.author.label_tag }}
+                        {{ form.author|add_class:"form-select" }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.category.label_tag }}
+                        {{ form.category|add_class:"form-select" }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.image.label_tag }}
+                        {{ form.image|add_class:"form-control" }}
+                    </div>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
